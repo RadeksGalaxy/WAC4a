@@ -61,6 +61,9 @@ def registrace():
 
 @app.route('/restapi/odeslano', methods=['GET', 'POST'])
 def odesli():
+    """
+    Metoda co resi vse okolo. Zapis, kontrolu soboru...
+    """
     if request.method == "POST":
         qtc_data = request.get_json()
         cetnost = False
