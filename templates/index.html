@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vodaci</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="container">
+        <img src="/static/img/big%20logo.png" alt="logo skoly" style="width: 60%;height: 60%">
+        <h1>Rozsazení v lodích na vodáckém kurzu 2023 SPŠE Ječná</h1>
+        <br>
+        <a href="/registrace"><button>Registrace</button></a>
+        <br>
+        <h2>Seznam kamarádů</h2>
+    <table>
+        <tr>
+            <th>Jmeno</th>
+            <th>Plave</th>
+            <th>Kamarad</th>
+            <th>Trida</th>
+        </tr>
+
+        {% for ucastnik in muzici %}
+            <tr>
+                <th>{{ucastnik.jmeno}}</th>
+                <th>{{ucastnik.plave}}</th>
+                <th>{{ucastnik.kamos}}</th>
+                <th>{{ucastnik.trida}}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <p>Pro jakoukoli nejasnot napiste <a href="https://github.com/RadeksGalaxy/WAC4a/issues">Feedback</a></p>
+    <p>Nebo poslete <a href="mailto:radakoblic@gmail.com">email</a></p>
+    </div>
+</body>
+</html>

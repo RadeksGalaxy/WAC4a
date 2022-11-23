@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vodaci</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="container">
+    <div id="con2">
+        <div class="text">
+            <h1>Registrace</h1>
+        </div>
+        <div class="image">
+            <img src="/static/img/sml%20logo.svg">
+        </div>
+    </div>
+    <br>
+    <form onsubmit = "event.preventDefault();" method="post" name="form">
+        <label for="name">Jmeno: </label>
+        <input type="text" id="name" name="nick" placeholder="prezdivka" minlength="2" maxlength="20" required><br>
+        <label for="plave">Jsi plavec:</label>
+        <select id="plave" name="je_plavec" required>
+            <option value="1">Ano</option>
+            <option value="0">Ne</option>
+        </select><br>
+        <label for="kamos">Kamarad: </label>
+        <input type="text" id="kamos" name="kanoe_kamarad" placeholder="kamarad" minlength="2" maxlength="20"><br>
+        <label for="trida">Trida: </label>
+        <input type="text" id="trida" name="trida" placeholder="trida"><br>
+        <input class="button" onclick="send()" type="submit" value="Odeslat">
+    </form>
+    <ul>
+        <li><a href="/" class="button"><button>Zpet</button></a></li>
+    </ul>
+</div>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    function send()
+    {
+        if (validace()){
+            var data ={
+            "jmeno": $("#name").val(),
+            "plave": $("#plave").val(),
+            "kamarad": $("#kamos").val(),
+                "trida": $("#trida").val()
+            };
+
+            jQuery.ajax({
+                type: "POST",
+                url: '/restapi/odeslano',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json',
+                success:function(data) {
+                    alert(data["processed"])
+                    document.getElementById("name").value = "";
+                    document.getElementById("kamos").value = "";
+                    document.getElementById("trida").value = "";
+                }
+            });
+        }else {
+            alert("spatne zapsane hodnoty")
+        }
+    }
+
+    function validace(){
+        plavec = $("#plave").val()
+        name = $("#name").val()
+        kamos = $("#kamos").val()
+        trida = $("#trida").val()
+
+        if (plavec == 0) {
+            return false
+        }
+        if (name.length < 2 || name.length > 20) {
+            return false
+        }
+        if (trida.length < 0 || trida.length > 5) {
+            return false
+        }
+        if (kamos.length == 0){
+            return true
+        }else {
+            if (kamos.length > 2 && kamos.length < 20) {
+                return true
+            }
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
