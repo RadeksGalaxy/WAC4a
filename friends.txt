@@ -1,2 +1,3 @@
 radek,1,denil,c4a
 matej,1,xxxx,c2b
+lukas,1,JEDU SAM,c4a
