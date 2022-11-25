@@ -77,7 +77,11 @@ def odesli():
         else:
             if c.validace():
                 f = open("friends.txt", "a")
-                f.write(str(qtc_data["jmeno"]) + "," + str(qtc_data["plave"]) + "," + str(qtc_data["kamarad"]) + "," + str(qtc_data["trida"])+ "\n")
+                if len(c.kamos) == 0:
+                    f.write(str(qtc_data["jmeno"]) + "," + str(qtc_data["plave"]) + ",JEDU SAM," + str(qtc_data["trida"]) + "\n")
+                    c.kamos = "JEDU SAM"
+                else:
+                    f.write(str(qtc_data["jmeno"]) + "," + str(qtc_data["plave"]) + "," + str(qtc_data["kamarad"]) + "," + str(qtc_data["trida"])+ "\n")
                 f.close()
                 lidi.append(c)
                 results = {'processed': 'Zapsano'}
